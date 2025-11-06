@@ -31,3 +31,4 @@ export default function ProductsPage() {
   );
 }
 // Nota: width y height son obligatorios en <Image> para calcular el espacio que ocupará (evita saltos de diseño).
+// Nota: Usamos el componente Image porque next lo prefiere para ayudarnos con el ancho de banda y Mejora el rendimiento (LCP = Largest Contentful Paint).
