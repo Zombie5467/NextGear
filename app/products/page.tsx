@@ -3,13 +3,13 @@ import { getMockProducts } from "../../lib/products";
 
 export default function ProductsPage() {
   const products = getMockProducts();
-  console.log(products);
+  // console.log(products);
   console.log("world, hold on");
 
   return (
     <div>
       <h1 className="text-2xl font-bold">Catálogo de productos</h1>
-      <ul>
+      <ul className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
         {products.map((product) => (
           <li key={product.id}>
             <h2 className="text-xl">{product.title}</h2>
