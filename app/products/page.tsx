@@ -1,34 +1,30 @@
-import Image from "next/image";
-import { getMockProducts } from "../../lib/products";
+import ProductCard from "@/components/ProductCard";
+import { getMockProducts } from "../../lib/getMockProducts"; // server-side helper
+import type { Metadata } from "next";
+
+
+export const metadata: Metadata = {
+  title: "Productos",
+  description: "Catálogo de productos",
+};
+
+
 
 export default function ProductsPage() {
-  const products = getMockProducts();
-  // console.log(products);
-  console.log("world, hold on");
+  const products = getMockProducts(); // esto corre en el servidor (sync mock)
 
+  // Si quieres manejar onAddToCart en cliente, puedes pasar una función "dummy"
+  // que el componente cliente ejecutará. Por ejemplo, dejarla undefined por ahora.
   return (
-    <div>
-      <h1 className="text-2xl font-bold">Catálogo de productos</h1>
-      <ul className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-        {products.map((product) => (
-          <li key={product.id}>
-            <h2 className="text-xl">{product.title}</h2>
-            <p>{product.description}</p>
-            <p>Precio: ${product.price}</p>
-
-            {/* ✅ Versión optimizada */}
-            <Image
-              src={product.images[0]}
-              alt={product.title}
-              width={300} // ⚠️ obligatorio
-              height={300} // ⚠️ obligatorio
-              className="rounded-lg"
-            />
+    <section className="container mx-auto px-4 py-6">
+      <h1 className="text-2xl font-bold mb-4">Catálogo</h1>
+      <ul className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
+        {products.map((p, index) => (
+          <li key={p.id}>
+            <ProductCard product={p} priority={index === 0}/>
           </li>
         ))}
       </ul>
-    </div>
+    </section>
   );
 }
-// Nota: width y height son obligatorios en <Image> para calcular el espacio que ocupará (evita saltos de diseño).
-// Nota: Usamos el componente Image porque next lo prefiere para ayudarnos con el ancho de banda y Mejora el rendimiento (LCP = Largest Contentful Paint).

@@ -2,7 +2,7 @@
 import { Product } from "../types/products";
 // (interface que definimos)
 
-//   images: ["/public/images/products/product-1.jpg"],
+// images: ["/public/images/products/product-1.jpg"],
 // devuelve un arreglo con 6-12 objetos Product (la interface que importamos).
 export function getMockProducts(): Product[] {
   return [
@@ -106,10 +106,12 @@ export function getMockProducts(): Product[] {
   ];
 }
 
-// export function getProductById(id: string): Product | undefined {
-//     return getMockProducts().find(product => product.id === id);
-//     // busca por id dentro del arreglo retornado por getMockProducts
-// }
+function getProductById(id: string): Product | undefined {
+    return getMockProducts().find(product => product.id === id);
+    // busca por id dentro del arreglo retornado por getMockProducts
+}
+
+export default getProductById;
 
 // El primer product es cada elemento del array durante la iteración.
 // puede llamarse p, item etc.
