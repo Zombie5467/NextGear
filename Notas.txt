@@ -1,0 +1,21 @@
+Primero tenemos la interface Product creada --> 
+La importamos en getMockProducts.ts --> 
+la pasamos como tipo de retorno.
+getMockProducts(): Product[] para que haga el retorno de arreglo de objetos con los productos siguiendo la interface product --> 
+pasamos a ProductCard.tsx donde tenemos el componente export default function ProductCard({ product, onAddToCart, priority }: Props) 
+y le pasamos Products como una de sus props, product (definimos una interface para pasar Product como product, como props) -->
+importamos ProductCard y getMockProducts a products/page.tsx, guaramos el mock de productos en una constante const products = getMockProducts(), 
+hacemos map y pasamos la constante como props a <ProductCard product={p} priority={index === 0}/>
+
+Para la pagina de detalles de cada producto: 
+la function function getProductById(id: string): Product | undefined 
+que recibe un id que es un string (no el tipo Product), el cual viene de la interface Product, y utilizando el método find() 
+toma el primer producto de getMockProducts() con ese id especifico --> 
+pasamos a ProductCard.tsx donde al hacer click en view details: <Link href={/products/${product.id}} className="underline"> View Details </Link> 
+se crea la ruta con el id especifico de ese producto /products/${product.id} --> 
+de ahi pasamos a products/[id]/page.tsx donde creamos la pagina de detalles de la siguiente forma: 
+con la funcion export default async function ProductPage({ params }: { params: { id: string } }) 
+tomamos una props que es el id del producto en cuestion como string, guardamos getProductById en una constante const product = getProductById(id); 
+resolvemos los params y la pagina de detalles se randeriza.
+
+OJO: Link solo construye la URL con product.id; la página [id] es la que usa ese id para buscar el producto.

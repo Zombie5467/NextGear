@@ -13,8 +13,6 @@ export const metadata: Metadata = {
 export default function ProductsPage() {
   const products = getMockProducts(); // esto corre en el servidor (sync mock)
 
-  // Si quieres manejar onAddToCart en cliente, puedes pasar una función "dummy"
-  // que el componente cliente ejecutará. Por ejemplo, dejarla undefined por ahora.
   return (
     <section className="container mx-auto px-4 py-6">
       <h1 className="text-2xl font-bold mb-4">Catálogo</h1>
@@ -22,6 +20,8 @@ export default function ProductsPage() {
         {products.map((p, index) => (
           <li key={p.id}>
             <ProductCard product={p} priority={index === 0}/>
+            {/* product es una de las 3 propiedades que ProductCard recibe (Props). 
+              ={p} es el nombre de la variable local dentro del map.*/}
           </li>
         ))}
       </ul>
